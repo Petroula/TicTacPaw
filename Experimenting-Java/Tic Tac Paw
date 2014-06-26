@@ -1,0 +1,314 @@
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+
+/**
+ * @author Petroula
+ *
+ */
+
+public class TicTacPaw implements MouseListener{
+	
+	JFrame GUI = new JFrame("");
+	JPanel panel = new JPanel();
+	boolean checkTurn = true;
+	JButton buttons[][] = new JButton[3][3];
+	boolean button1, button2, button3, button4, button5, button6, button7, button8, button9 = false;
+	Random rand = new Random();
+	int computer;
+	
+	public TicTacPaw() {
+		
+		for (int x=0; x<3; x++) {
+			for (int y=0; y<3; y++) {
+			buttons[x][y] = new JButton("?");
+	//		System.out.println(x);
+	//		System.out.println(y);
+			
+			buttons[x][y].addMouseListener(new MouseListener() {
+
+				public void mouseClicked(MouseEvent e) {}
+				public void mouseEntered(MouseEvent e) {}
+				public void mouseExited(MouseEvent e) {}
+								
+								
+				public void mousePressed(MouseEvent e) {
+						
+				
+					JButton pressed = (JButton) e.getSource();
+				//			 System.out.println(pressed);
+				//			 System.out.println(pressed.getLocation());
+				//			 System.out.println(pressed.getY());
+					
+					
+							 if((pressed.getX()==22 || pressed.getX()==23 || pressed.getX()==24) && pressed.getY()==5) {
+								 button1=true;
+								 if(!(buttons[0][0].getText()=="?")){
+								    return;
+								 } else if (buttons[0][0].getText()=="?"){
+								 buttons[0][0].setText("X");
+								 buttons[0][0].setEnabled(false);
+								 checkTurn = false;
+								 vsUser();
+								 }
+							 } else if ((pressed.getX()==69 || pressed.getX()==70 || pressed.getX()==71) && pressed.getY()==5){
+								 button2=true;
+								 if(!(buttons[0][1].getText()=="?")){
+									 return;
+									 } else if (buttons[0][1].getText()=="?"){
+									 buttons[0][1].setText("X");
+									 buttons[0][1].setEnabled(false);
+									 checkTurn = false;	
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==116 || pressed.getX()==117 || pressed.getX()==118) && pressed.getY()==5){
+								 button3=true;
+								 if(!(buttons[0][2].getText()=="?")){
+									 return;
+									 } else if (buttons[0][2].getText()=="?"){
+									 buttons[0][2].setText("X");
+									 buttons[0][2].setEnabled(false);
+									 checkTurn = false;
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==22 || pressed.getX()==23 || pressed.getX()==24) && pressed.getY()==36){
+								 button4=true;
+								 if(!(buttons[1][0].getText()=="?")){
+									 return;
+									 } else if (buttons[1][0].getText()=="?"){
+									 buttons[1][0].setText("X");
+									 buttons[1][0].setEnabled(false);
+									 checkTurn = false;	
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==69 || pressed.getX()==70 || pressed.getX()==71) && pressed.getY()==36) {
+								 button5=true;
+								 if(!(buttons[1][1].getText()=="?")){
+									 return;
+									 } else if (buttons[1][1].getText()=="?"){
+									 buttons[1][1].setText("X");
+									 buttons[1][1].setEnabled(false);
+									 checkTurn = false;
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==116 || pressed.getX()==117 || pressed.getX()==118) && pressed.getY()==36){
+								button6=true;
+								if(!(buttons[1][2].getText()=="?")){
+									return;
+								 } else if (buttons[1][2].getText()=="?"){
+								 buttons[1][2].setText("X");
+								 buttons[1][2].setEnabled(false);
+								 checkTurn = false;	
+								 vsUser();
+								 }
+							 } else if ((pressed.getX()==22 || pressed.getX()==23 || pressed.getX()==24) && pressed.getY()==67){
+								 button7=true;
+								 if(!(buttons[2][0].getText()=="?")){
+									 return;
+									 } else if (buttons[2][0].getText()=="?"){
+									 buttons[2][0].setText("X");
+									 buttons[2][0].setEnabled(false);
+									 checkTurn = false;	
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==69 || pressed.getX()==70 || pressed.getX()==71) && pressed.getY()==67){
+								 button8=true;
+								 if(!(buttons[2][1].getText()=="?")){
+									 return;
+									 } else if (buttons[2][1].getText()=="?"){
+									 buttons[2][1].setText("X");
+									 buttons[2][1].setEnabled(false);
+									 checkTurn = false;	
+									 vsUser();
+									 }
+							 } else if ((pressed.getX()==116 || pressed.getX()==117 || pressed.getX()==118) && pressed.getY()==67) {
+								 button9=true;
+								 if(!(buttons[2][2].getText()=="?")){
+									 return;
+									 } else if (buttons[2][2].getText()=="?"){
+									 buttons[2][2].setText("X");
+									 buttons[2][2].setEnabled(false);
+									 checkTurn = false;	
+									 vsUser();
+									 }
+							 }
+				}
+					      	
+				public void mouseReleased(MouseEvent e) {}	
+				});
+			
+			panel.add(buttons[x][y]);
+			}
+	}
+		
+		GUI.add(panel);
+		GUI.setContentPane(panel);
+		GUI.setLocationRelativeTo(null);
+		GUI.setSize(200, 150);
+		GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GUI.setVisible(true);
+}   
+
+
+	public static void main(String[] args) {
+		
+		new TicTacPaw();		
+	}
+	
+	
+	@SuppressWarnings("deprecation")
+	public void vsUser() {
+		
+	if (checkWin()==false && checkLose()==false && !(button1==true && button2==true && button3==true && button4==true
+			&& button5==true && button6==true && button7==true && button8==true && button9==true)) {	
+	
+			computer =rand.nextInt(9);
+		    System.out.println(computer);
+		    
+		    if (computer==0 && button1==false){
+		    	buttons[0][0].setText("O");
+			    buttons[0][0].setEnabled(false);
+		    	checkTurn = true;
+		    	button1=true;
+		    } else if (computer==1 && button2==false) {
+		    	buttons[0][1].setText("O");
+		    	buttons[0][1].setEnabled(false);
+		    	checkTurn = true;
+		    	button2=true;
+		    } else if (computer==2 && button3==false) {
+		    	buttons[0][2].setText("O");
+		    	buttons[0][2].setEnabled(false);
+		    	checkTurn = true;
+		    	button3=true;
+	    	} else if (computer==3 && button4==false) {
+		    	buttons[1][0].setText("O");
+		    	buttons[1][0].setEnabled(false);
+		    	checkTurn = true;
+		    	button4=true;
+		    } else if (computer==4 && button5==false) {
+		    	buttons[1][1].setText("O");
+		    	buttons[1][1].setEnabled(false);
+		    	checkTurn = true;	
+		    	button5=true;
+		    } else if (computer==5 && button6==false) {
+	    		buttons[1][2].setText("O");
+		    	buttons[1][2].setEnabled(false);
+		    	checkTurn = true;
+		    	button6=true;
+		    } else if (computer==6 && button7==false) {
+		    	buttons[2][0].setText("O");
+		    	buttons[2][0].setEnabled(false);
+		    	checkTurn = true;
+		    	button7=true;
+	    	} else if (computer==7 && button8==false) {
+		    	buttons[2][1].setText("O");
+		    	buttons[2][1].setEnabled(false);
+		    	checkTurn = true;
+		    	button8=true;
+		   } else if (computer==8 && button9==false) {
+		    	buttons[2][2].setText("O");
+		    	buttons[2][2].setEnabled(false);
+		    	checkTurn = true;
+		    	button9=true;
+		   } else {
+		    	vsUser();
+		   }
+	
+		
+	} 
+	
+	
+    if (checkWin()==true) {
+    	JOptionPane.showMessageDialog(null, "You won!");
+    	endGame();
+    	GUI.disable();
+    	GUI.dispose();
+    	new TicTacPaw();
+    } else if (checkLose()==true) {
+        	JOptionPane.showMessageDialog(null, "You lost!");
+    		endGame();
+    		GUI.disable();
+    		GUI.dispose();
+    		System.exit(0);
+    		
+    } else if (checkTie()==true) {
+    	    	  JOptionPane.showMessageDialog(null, "It's a tie!");
+    	    	  endGame();
+    	    	  GUI.disable();
+    	      	  GUI.dispose();
+    	    	  new TicTacPaw();
+    	      }      
+    }
+
+	public boolean checkWin() {
+		
+		if ((buttons[0][0].getText()=="X" && buttons[0][1].getText()=="X" && buttons[0][2].getText()=="X")
+				|| (buttons[1][0].getText()=="X" && buttons[1][1].getText()=="X" && buttons[1][2].getText()=="X") 
+			    || (buttons[2][0].getText()=="X" && buttons[2][1].getText()=="X" && buttons[2][2].getText()=="X")
+			    
+			    || (buttons[0][0].getText()=="X" && buttons[1][0].getText()=="X" && buttons[2][0].getText()=="X")
+			    || (buttons[0][1].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][1].getText()=="X")
+			    || (buttons[0][2].getText()=="X" && buttons[1][2].getText()=="X" && buttons[2][2].getText()=="X")
+			    
+			    || (buttons[0][0].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][2].getText()=="X")
+			    || (buttons[0][2].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][0].getText()=="X")) {
+			return true;
+		}	
+			return false;
+		}
+		
+	public boolean checkLose() {
+		
+		if ((buttons[0][0].getText()=="O" && buttons[0][1].getText()=="O" && buttons[0][2].getText()=="O")
+				|| (buttons[1][0].getText()=="O" && buttons[1][1].getText()=="O" && buttons[1][2].getText()=="O") 
+			    || (buttons[2][0].getText()=="O" && buttons[2][1].getText()=="O" && buttons[2][2].getText()=="O")
+			    
+			    || (buttons[0][0].getText()=="O" && buttons[1][0].getText()=="O" && buttons[2][0].getText()=="O")
+			    || (buttons[0][1].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][1].getText()=="O")
+			    || (buttons[0][2].getText()=="O" && buttons[1][2].getText()=="O" && buttons[2][2].getText()=="O")
+			    
+			    || (buttons[0][0].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][2].getText()=="O")
+			    || (buttons[0][2].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][0].getText()=="O")) {
+			return true;
+		}	
+			return false;
+	    }
+	
+	public boolean checkTie() {
+		
+		if (checkWin()==false && checkLose()==false && (button1==true && button2==true && button3==true && button4==true
+	 			&& button5==true && button6==true && button7==true && button8==true && button9==true)) {
+			return true;
+			
+		}
+		    return false;
+		
+		
+	}
+	
+
+	
+	public void endGame() {
+		buttons[0][0].setEnabled(false);
+		buttons[0][1].setEnabled(false);
+		buttons[0][2].setEnabled(false);
+		buttons[1][0].setEnabled(false);
+		buttons[1][1].setEnabled(false);
+		buttons[1][2].setEnabled(false);
+		buttons[2][0].setEnabled(false);
+		buttons[2][1].setEnabled(false);
+		buttons[2][2].setEnabled(false);
+	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+}
