@@ -18,9 +18,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	boolean checkTurn = true;
 	Random rand = new Random();
 	int computer;
-	Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10;
-    TextView textView1, textView2;
+	Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10,
+	button11, button12, button13;
+        TextView textView1, textView2;
+        int count=1;
 
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -36,6 +40,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	button08 = (Button)findViewById(R.id.button8);
 	button09 = (Button)findViewById(R.id.button9);
 	button10 = (Button)findViewById(R.id.button10);
+	button11 = (Button)findViewById(R.id.button11);
+	button12 = (Button)findViewById(R.id.button12);
+	button13 = (Button)findViewById(R.id.button13);
 
 	button01.setOnClickListener(this);
 	button02.setOnClickListener(this);
@@ -47,6 +54,13 @@ public class MainActivity extends Activity implements OnClickListener {
         button08.setOnClickListener(this);
         button09.setOnClickListener(this);
         button10.setOnClickListener(this);
+        button11.setOnClickListener(this);
+        button12.setOnClickListener(this);
+        button13.setOnClickListener(this);
+        
+        button11.setVisibility(View.INVISIBLE);
+        button12.setVisibility(View.INVISIBLE);
+        button13.setVisibility(View.INVISIBLE);
         
         if (savedInstanceState == null) {
         	getFragmentManager().beginTransaction()
@@ -103,7 +117,7 @@ public class MainActivity extends Activity implements OnClickListener {
             checkEnd();
             if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
             		|| button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                    || button09.isEnabled()) {
+                    || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
             	vsUser();
             }
          } else if (v.getId()==R.id.button2 && button02.isEnabled()) {
@@ -112,7 +126,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
                     || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                    || button09.isEnabled()) {
+                    || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
                 vsUser();
             }
          } else if (v.getId()==R.id.button3 && button03.isEnabled()) {
@@ -121,7 +135,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
                     || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                    || button09.isEnabled()) {
+                    || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
                 vsUser();
             }
          } else if (v.getId()==R.id.button4 && button04.isEnabled()) {
@@ -130,7 +144,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
                     || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                    || button09.isEnabled()) {
+                    || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
                 vsUser();
             }
          } else if (v.getId()==R.id.button5 && button05.isEnabled()) {
@@ -139,7 +153,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
             		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                     || button09.isEnabled()) {
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
                 vsUser();
             }
          } else if (v.getId()==R.id.button6 && button06.isEnabled()) {
@@ -148,7 +162,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
               		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                     || button09.isEnabled()) {
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
              	 vsUser();
             }
          } else if (v.getId()==R.id.button7 && button07.isEnabled()) {
@@ -157,7 +171,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
             		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                     || button09.isEnabled()) {
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
               	 vsUser();
             }
          } else if (v.getId()==R.id.button8 && button08.isEnabled()) {
@@ -166,7 +180,7 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
             		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                     || button09.isEnabled()) {
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
               	 vsUser();
             }
          } else if (v.getId()==R.id.button9 && button09.isEnabled()) {
@@ -175,9 +189,36 @@ public class MainActivity extends Activity implements OnClickListener {
              checkEnd();
              if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
             		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
-                     || button09.isEnabled()) {
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
                  vsUser();
             }
+         } else if (v.getId()==R.id.button11 && button11.isEnabled()) {
+        	 button11.setText("X");
+             button11.setEnabled(false);
+             checkEnd();
+             if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
+            		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
+                 vsUser();
+            }   
+         } else if (v.getId()==R.id.button12 && button12.isEnabled()) {
+        	 button12.setText("X");
+             button12.setEnabled(false);
+             checkEnd();
+             if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
+            		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
+                 vsUser();
+            } 
+         } else if (v.getId()==R.id.button13 && button13.isEnabled()) {
+        	 button13.setText("X");
+             button13.setEnabled(false);
+             checkEnd();
+             if(button01.isEnabled() || button02.isEnabled() || button03.isEnabled() || button04.isEnabled()
+            		 || button05.isEnabled() || button06.isEnabled() || button07.isEnabled() || button08.isEnabled()
+                     || button09.isEnabled() || button11.isEnabled() || button12.isEnabled() || button13.isEnabled()) {
+                 vsUser();
+            }       
          } else if (v.getId()==R.id.button10) {
         	 newGame();
          }
@@ -186,7 +227,12 @@ public class MainActivity extends Activity implements OnClickListener {
     
     public void vsUser() {
   	
-    	computer =rand.nextInt(9);
+    	if (count==1) {
+    		computer =rand.nextInt(9);
+    	} else if (count==2) {
+    		computer =rand.nextInt(11);
+    	}
+    	
     	
     	if (computer==0 && button01.isEnabled()){
         	button01.setText("O");
@@ -215,6 +261,15 @@ public class MainActivity extends Activity implements OnClickListener {
         } else if (computer==8 && button09.isEnabled()) {
         	button09.setText("O");
             button09.setEnabled(false);
+        } else if (computer==9 && button11.isEnabled()) {
+        	button11.setText("O");
+        	button11.setEnabled(false);
+        } else if (computer==10 && button12.isEnabled()) {
+        	button12.setText("O");
+        	button12.setEnabled(false);
+        } else if (computer==11 && button13.isEnabled()) {
+        	button13.setText("O");
+        	button13.setEnabled(false);	         
         } else {
             vsUser();
         }
@@ -229,9 +284,15 @@ public class MainActivity extends Activity implements OnClickListener {
         if (checkWin()==true) {
         	endGame();
             textView2.setText("You won!");
+            count++;
+            if (count==3) {
+            	textView2.setText("You won all levels!");
+            	count=1;          	
+            }
         } else if (checkLose()==true) {
         	endGame();
             textView2.setText("You lost!");
+            count=1;           
         } else if (checkTie()==true) {
             endGame();
             textView2.setText("It's a tie!");
@@ -241,16 +302,27 @@ public class MainActivity extends Activity implements OnClickListener {
     
     public boolean checkWin() {
     	
-    	if ((button01.getText()=="X" && button02.getText()=="X" && button03.getText()=="X")
+    	if ((button01.getText().equals("X") && button02.getText().equals("X") && button03.getText().equals("X"))
     			|| (button04.getText().equals("X") && button05.getText().equals("X") && button06.getText().equals("X"))
                 || (button07.getText().equals("X") && button08.getText().equals("X") && button09.getText().equals("X"))
-
+                
                 || (button01.getText().equals("X") && button04.getText().equals("X") && button07.getText().equals("X"))
                 || (button02.getText().equals("X") && button05.getText().equals("X") && button08.getText().equals("X"))
                 || (button03.getText().equals("X") && button06.getText().equals("X") && button09.getText().equals("X"))
-
+                
                 || (button01.getText().equals("X") && button05.getText().equals("X") && button09.getText().equals("X"))
-                || (button03.getText().equals("X") && button05.getText().equals("X") && button07.getText().equals("X"))) {
+                || (button03.getText().equals("X") && button05.getText().equals("X") && button07.getText().equals("X"))
+                
+                
+    			//level 2 extra checks
+                || (button02.getText().equals("X") && button03.getText().equals("X") && button11.getText().equals("X"))
+                || (button05.getText().equals("X") && button06.getText().equals("X") && button12.getText().equals("X"))
+                || (button08.getText().equals("X") && button09.getText().equals("X") && button13.getText().equals("X"))
+                
+                || (button11.getText().equals("X") && button12.getText().equals("X") && button13.getText().equals("X"))
+                
+                || (button02.getText().equals("X") && button06.getText().equals("X") && button13.getText().equals("X"))
+                || (button11.getText().equals("X") && button06.getText().equals("X") && button08.getText().equals("X"))) {
     		return true;
     	}
     	return false;
@@ -268,7 +340,18 @@ public class MainActivity extends Activity implements OnClickListener {
                 || (button03.getText().equals("O") && button06.getText().equals("O") && button09.getText().equals("O"))
 
                 || (button01.getText().equals("O") && button05.getText().equals("O") && button09.getText().equals("O"))
-                || (button03.getText().equals("O") && button05.getText().equals("O") && button07.getText().equals("O"))) {
+                || (button03.getText().equals("O") && button05.getText().equals("O") && button07.getText().equals("O"))
+                
+    			
+    			//level 2 extra checks
+                || (button02.getText().equals("O") && button03.getText().equals("O") && button11.getText().equals("O"))
+                || (button05.getText().equals("O") && button06.getText().equals("O") && button12.getText().equals("O"))
+                || (button08.getText().equals("O") && button09.getText().equals("O") && button13.getText().equals("O"))
+                
+                || (button11.getText().equals("O") && button12.getText().equals("O") && button13.getText().equals("O"))
+                
+                || (button02.getText().equals("O") && button06.getText().equals("O") && button13.getText().equals("O"))
+                || (button11.getText().equals("O") && button06.getText().equals("O") && button08.getText().equals("O"))) {
     		return true;
     	}	
     	return false;
@@ -278,12 +361,21 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public boolean checkTie() {
 
-    	if (checkWin()==false && checkLose()==false && (!button01.isEnabled() && !button02.isEnabled() && !button03.isEnabled()
-    			&& !button04.isEnabled() && !button05.isEnabled() && !button06.isEnabled() && !button07.isEnabled()
-                && !button08.isEnabled() && !button09.isEnabled())) {
-    		return true;
+    	if (count==1) {
+    		if (checkWin()==false && checkLose()==false && (!button01.isEnabled() && !button02.isEnabled() &&
+    				!button03.isEnabled() && !button04.isEnabled() && !button05.isEnabled() && !button06.isEnabled() 
+    				&& !button07.isEnabled() && !button08.isEnabled() && !button09.isEnabled())) {
+    			return true;
+    		 }
+    	} else if (count==2) {
+    		if (checkWin()==false && checkLose()==false && (!button01.isEnabled() && !button02.isEnabled() &&
+    				!button03.isEnabled() && !button04.isEnabled() && !button05.isEnabled() && !button06.isEnabled() 
+    				&& !button07.isEnabled() && !button08.isEnabled() && !button09.isEnabled() && !button11.isEnabled()
+    				&& !button12.isEnabled() && !button13.isEnabled())) {
+    			return true;
+    		}
     	}
-    	return false;	
+		return false;		
     }
 
 
@@ -299,7 +391,11 @@ public class MainActivity extends Activity implements OnClickListener {
     	button07.setEnabled(false);
     	button08.setEnabled(false);
     	button09.setEnabled(false);
-    }
+        button11.setEnabled(false);
+        button12.setEnabled(false);
+        button13.setEnabled(false);
+    }   
+    
 
 
     public void newGame() {
@@ -316,6 +412,10 @@ public class MainActivity extends Activity implements OnClickListener {
     	button07.setEnabled(true);
     	button08.setEnabled(true);
     	button09.setEnabled(true);
+    	button11.setVisibility(View.INVISIBLE);
+    	button12.setVisibility(View.INVISIBLE);
+    	button13.setVisibility(View.INVISIBLE);	
+    	
     	button01.setText("");
     	button02.setText("");
     	button03.setText("");
@@ -325,10 +425,20 @@ public class MainActivity extends Activity implements OnClickListener {
     	button07.setText("");
     	button08.setText("");
     	button09.setText("");
-    	textView1.setText("Level 1");
+    	button11.setText("");
+    	button12.setText("");
+    	button13.setText("");
+    	textView1.setText("Level " + count);
     	textView2.setText("");
+    	if (count==2) {
+        	button11.setVisibility(View.VISIBLE);
+        	button12.setVisibility(View.VISIBLE);
+        	button13.setVisibility(View.VISIBLE);
+        	button11.setEnabled(true);
+        	button12.setEnabled(true);
+        	button13.setEnabled(true);
+
+        }
     }
-
-
 }
 
