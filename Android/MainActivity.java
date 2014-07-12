@@ -1,13 +1,16 @@
 package com.example.tictacpawfinal;
 
 import java.util.Random;
+
 import android.app.Activity;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Chronometer;
 
 /**
 * @author Petroula
@@ -15,15 +18,14 @@ import android.widget.TextView;
 */
 
 public class MainActivity extends Activity implements OnClickListener {
-	boolean checkTurn = true;
+	
 	Random rand = new Random();
 	int computer;
 	Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10,
-	button11, button12, button13;
+	button11, button12, button13, button14;
         TextView textView1, textView2;
         int count=1;
-
-    
+        Chronometer seconds;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,12 @@ public class MainActivity extends Activity implements OnClickListener {
     	button06 = (Button)findViewById(R.id.button6);
     	button07 = (Button)findViewById(R.id.button7);
 	button08 = (Button)findViewById(R.id.button8);
-	button09 = (Button)findViewById(R.id.button9);
+        button09 = (Button)findViewById(R.id.button9);
 	button10 = (Button)findViewById(R.id.button10);
 	button11 = (Button)findViewById(R.id.button11);
 	button12 = (Button)findViewById(R.id.button12);
-	button13 = (Button)findViewById(R.id.button13);
+        button13 = (Button)findViewById(R.id.button13);
+        button14 = (Button)findViewById(R.id.button14);
 
 	button01.setOnClickListener(this);
 	button02.setOnClickListener(this);
@@ -57,59 +60,22 @@ public class MainActivity extends Activity implements OnClickListener {
         button11.setOnClickListener(this);
         button12.setOnClickListener(this);
         button13.setOnClickListener(this);
+        button14.setOnClickListener(this);
         
         button11.setVisibility(View.INVISIBLE);
         button12.setVisibility(View.INVISIBLE);
-        button13.setVisibility(View.INVISIBLE);
+        button13.setVisibility(View.INVISIBLE); 
         
-        if (savedInstanceState == null) {
-        	getFragmentManager().beginTransaction()
-        	.add(R.id.container, new PlaceholderFragment()).commit();
-        }
+        seconds = (Chronometer) findViewById(R.id.chronometer);
+    	seconds.start();           
     }
 
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	// Inflate the menu; this adds items to the action bar if it is present.
-    	getMenuInflater().inflate(R.menu.main, menu);
-    	return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	// Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-        	return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {  	
-    	public PlaceholderFragment() {
-    }
-
-
-    	@Override
-    	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-    			Bundle savedInstanceState) {
-                View rootView = inflater.inflate(R.layout.fragment_main, container,false);
-                return rootView;
-        }
-     }
-
-
-    @Override
     public void onClick(View v) {
+	
     	
+    	/** Checks which button was pressed and assigns an X to it */  	
     	
     	if(v.getId()==R.id.button1 && button01.isEnabled()) {
     		button01.setText("X");
@@ -221,18 +187,30 @@ public class MainActivity extends Activity implements OnClickListener {
             }       
          } else if (v.getId()==R.id.button10) {
         	 newGame();
+         } else if (v.getId()==R.id.button14) {
+        	 
+        	 /** Changes back to the welcome screen */  	
+        	 Intent changeView = new Intent(getApplicationContext(), WelcomeActivity.class);
+			 startActivity(changeView);
          }
     }
    
     
+    /** This method handles the computer's turn by randomly 
+     * choosing between the available options */  	
     public void vsUser() {
-  	
+  
+    	
+    	/** Random numbers according to which level the user is currently */ 
+    	
     	if (count==1) {
     		computer =rand.nextInt(9);
     	} else if (count==2) {
     		computer =rand.nextInt(11);
     	}
     	
+    	
+    	/** Checks the randomly chosen number and the availability of the button and assigns an O to it */  	
     	
     	if (computer==0 && button01.isEnabled()){
         	button01.setText("O");
@@ -277,12 +255,14 @@ public class MainActivity extends Activity implements OnClickListener {
      }
     
     
+    /** Checks for win, lose or tie situation */  	 
     public void checkEnd() {
     	
     	textView2 = (TextView) findViewById(R.id.textView2);
     
         if (checkWin()==true) {
         	endGame();
+        	seconds.stop();
             textView2.setText("You won!");
             count++;
             if (count==3) {
@@ -291,10 +271,12 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         } else if (checkLose()==true) {
         	endGame();
+        	seconds.stop();
             textView2.setText("You lost!");
             count=1;           
         } else if (checkTie()==true) {
             endGame();
+            seconds.stop();
             textView2.setText("It's a tie!");
         }
     }
@@ -314,7 +296,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 || (button03.getText().equals("X") && button05.getText().equals("X") && button07.getText().equals("X"))
                 
                 
-    			//level 2 extra checks
+    			/** Level 2 - extra checks */  	
                 || (button02.getText().equals("X") && button03.getText().equals("X") && button11.getText().equals("X"))
                 || (button05.getText().equals("X") && button06.getText().equals("X") && button12.getText().equals("X"))
                 || (button08.getText().equals("X") && button09.getText().equals("X") && button13.getText().equals("X"))
@@ -400,6 +382,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public void newGame() {
     	
+    	/** Resets the timer */  	
+    	seconds.setBase(SystemClock.elapsedRealtime());
+    	seconds.start();
+    	
     	textView1 = (TextView) findViewById(R.id.textView1);
     	textView2 = (TextView) findViewById(R.id.textView2);
     	
@@ -430,6 +416,8 @@ public class MainActivity extends Activity implements OnClickListener {
     	button13.setText("");
     	textView1.setText("Level " + count);
     	textView2.setText("");
+    	
+    	/** Makes the extra buttons available if the user is in level 2 */  	
     	if (count==2) {
         	button11.setVisibility(View.VISIBLE);
         	button12.setVisibility(View.VISIBLE);
