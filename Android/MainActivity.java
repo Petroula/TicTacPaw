@@ -4,8 +4,10 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,13 +21,13 @@ import android.widget.Chronometer;
 
 public class MainActivity extends Activity implements OnClickListener {
 	
-	Random rand = new Random();
-	int computer;
-	Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10,
-	button11, button12, button13, button14;
-        TextView textView1, textView2;
-        int count=1;
-        Chronometer seconds;
+    Random rand = new Random();
+    int computer;
+    Button button01, button02, button03, button04, button05, button06, button07, button08, button09, button10,
+    button11, button12, button13, button14;
+    TextView textView1, textView2, textView3;
+    int count=1;
+    Chronometer seconds;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	button10 = (Button)findViewById(R.id.button10);
 	button11 = (Button)findViewById(R.id.button11);
 	button12 = (Button)findViewById(R.id.button12);
-        button13 = (Button)findViewById(R.id.button13);
-        button14 = (Button)findViewById(R.id.button14);
+	button13 = (Button)findViewById(R.id.button13);
+	button14 = (Button)findViewById(R.id.button14);
 
 	button01.setOnClickListener(this);
 	button02.setOnClickListener(this);
@@ -67,7 +69,8 @@ public class MainActivity extends Activity implements OnClickListener {
         button13.setVisibility(View.INVISIBLE); 
         
         seconds = (Chronometer) findViewById(R.id.chronometer);
-    	seconds.start();           
+    	seconds.start();          
+    	
     }
 
     
@@ -196,13 +199,13 @@ public class MainActivity extends Activity implements OnClickListener {
     }
    
     
+    
     /** This method handles the computer's turn by randomly 
      * choosing between the available options */  	
     public void vsUser() {
   
     	
-    	/** Random numbers according to which level the user is currently */ 
-    	
+    	/** Random numbers according to which level the user currently is*/  	
     	if (count==1) {
     		computer =rand.nextInt(9);
     	} else if (count==2) {
@@ -258,17 +261,51 @@ public class MainActivity extends Activity implements OnClickListener {
     /** Checks for win, lose or tie situation */  	 
     public void checkEnd() {
     	
+    	
+    	long timeMillis;
+    	int timeSeconds;
+    	
     	textView2 = (TextView) findViewById(R.id.textView2);
-    
+    	textView3 = (TextView) findViewById(R.id.textView3);
+    	
         if (checkWin()==true) {
         	endGame();
         	seconds.stop();
-            textView2.setText("You won!");
-            count++;
+         	     	         	
+        	timeMillis = SystemClock.elapsedRealtime() - seconds.getBase();
+        	
+        	/** Counts the seconds it took to win the game */ 
+        	timeSeconds = (int) (timeMillis / 1000);    	
+        	
+        	/** Stores the quickest time so far*/     	
+        	if(!textView3.getText().toString().isEmpty()) {
+        		SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+            	if(timeSeconds<shared.getInt("Quickest Paw", timeSeconds)){          		
+            		SharedPreferences.Editor sharedEditor = shared.edit();
+                    sharedEditor.putInt("Quickest Paw", timeSeconds);
+                    sharedEditor.commit();
+                    textView3.setText("Quickest Paw is: " + Integer.toString(timeSeconds) + " seconds");
+            	}
+        	} else if (textView3.getText().toString().isEmpty()) {
+        		SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
+        		SharedPreferences.Editor sharedEditor = shared.edit();
+                sharedEditor.putInt("Quickest Paw", timeSeconds);
+                sharedEditor.commit();
+                textView3.setText("Quickest Paw is: " + Integer.toString(timeSeconds) + " seconds");
+        	}
+        	
+        	/** Continues to the next level only if time is less than 10 seconds */
+        	if(timeSeconds<10) {
+               textView2.setText("You won!");
+               count++;               
+        	} else {
+        		textView2.setText("Too slow, try again!");
+        	}
             if (count==3) {
             	textView2.setText("You won all levels!");
             	count=1;          	
-            }
+            }           
+            
         } else if (checkLose()==true) {
         	endGame();
         	seconds.stop();
