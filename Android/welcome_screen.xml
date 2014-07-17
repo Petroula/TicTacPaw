@@ -3,41 +3,44 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paws0"
+    android:background="@drawable/paw"
     tools:context="com.example.tictacpaw.MainActivity"
     tools:ignore="MergeRootFrame" >
 
     <RelativeLayout
-        android:layout_width="595dp"
-        android:layout_height="895dp" >
-
-        <TextView
-            android:id="@+id/textView0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="23dp"
-            android:text="Welcome to Tic Tac Paw!"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/paws_swipe_right" >
 
         <Button
             android:id="@+id/button15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView0"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/textView0"
-            android:layout_marginLeft="80dp"
-            android:text="Start" />
+            android:text="Start"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/button16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/button15"
+            android:text="Instructions"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button15"
-            android:layout_below="@+id/button15"
-            android:text="Quickest Paws" />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:text="Welcome to Tic Tac Paw!"
+            android:textColor="#FFFFFF"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>
         
