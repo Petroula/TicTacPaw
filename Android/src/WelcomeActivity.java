@@ -8,6 +8,11 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.View.*;
 import android.widget.*;
 
+/**
+* @author Petroula
+*
+*/
+
 public class WelcomeActivity extends Activity implements OnClickListener, OnGestureListener {
 
 	Button button15, button16;
