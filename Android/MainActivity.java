@@ -3,23 +3,20 @@ package com.example.tictacpawfinal;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.SystemClock;
+import android.content.*;
+import android.os.*;
 import android.preference.PreferenceManager;
 import android.view.*;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Chronometer;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.View.*;
+import android.widget.*;
 
 /**
 * @author Petroula
 *
 */
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnGestureListener {
 	
     Random rand = new Random();
     int computer;
@@ -28,8 +25,13 @@ public class MainActivity extends Activity implements OnClickListener {
     TextView textView1, textView2, textView3;
     int count=1;
     Chronometer seconds;
+    GestureDetector detector;
     
-    @Override
+    /** Checks if the main screen should be displayed after a swipe from the instructions page */
+    public static int recognizeScreen =0;
+    
+    @SuppressWarnings("deprecation")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_main);
@@ -42,14 +44,14 @@ public class MainActivity extends Activity implements OnClickListener {
     	button06 = (Button)findViewById(R.id.button6);
     	button07 = (Button)findViewById(R.id.button7);
 	button08 = (Button)findViewById(R.id.button8);
-        button09 = (Button)findViewById(R.id.button9);
+	button09 = (Button)findViewById(R.id.button9);
 	button10 = (Button)findViewById(R.id.button10);
-	button11 = (Button)findViewById(R.id.button11);
+        button11 = (Button)findViewById(R.id.button11);
 	button12 = (Button)findViewById(R.id.button12);
 	button13 = (Button)findViewById(R.id.button13);
 	button14 = (Button)findViewById(R.id.button14);
 
-	button01.setOnClickListener(this);
+        button01.setOnClickListener(this);
 	button02.setOnClickListener(this);
         button03.setOnClickListener(this);
         button04.setOnClickListener(this);
@@ -69,11 +71,12 @@ public class MainActivity extends Activity implements OnClickListener {
         button13.setVisibility(View.INVISIBLE); 
         
         seconds = (Chronometer) findViewById(R.id.chronometer);
-    	seconds.start();          
-    	
-    }
-
+    	seconds.start(); 
     
+    	detector = new GestureDetector(this);
+    }
+    
+   
     @Override
     public void onClick(View v) {
 	
@@ -284,14 +287,14 @@ public class MainActivity extends Activity implements OnClickListener {
             		SharedPreferences.Editor sharedEditor = shared.edit();
                     sharedEditor.putInt("Quickest Paw", timeSeconds);
                     sharedEditor.commit();
-                    textView3.setText("Quickest Paw is: " + Integer.toString(timeSeconds) + " seconds");
+                    textView3.setText("Quickest Paw is approximately: " + Integer.toString(timeSeconds) + " seconds");
             	}
         	} else if (textView3.getText().toString().isEmpty()) {
         		SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(this);
         		SharedPreferences.Editor sharedEditor = shared.edit();
                 sharedEditor.putInt("Quickest Paw", timeSeconds);
                 sharedEditor.commit();
-                textView3.setText("Quickest Paw is: " + Integer.toString(timeSeconds) + " seconds");
+                textView3.setText("Quickest Paw is approximately: " + Integer.toString(timeSeconds) + " seconds");
         	}
         	
         	/** Continues to the next level only if time is less than 10 seconds */
@@ -465,5 +468,48 @@ public class MainActivity extends Activity implements OnClickListener {
 
         }
     }
+
+
+	@Override
+	public boolean onDown(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		
+		if(e1.getX()>e2.getX()) {	
+			recognizeScreen=1;
+			
+       	    Intent changeToInstructions = new Intent(getApplicationContext(), InstructionsActivity.class);    
+       	    /** Passes the new value to the other activity */ 
+       	    changeToInstructions.putExtra("recognizeScreen", 1);
+			startActivity(changeToInstructions);		
+			return true;
+		}
+		return false;
+	}
+
+	public boolean onTouchEvent(MotionEvent ev) {
+		return detector.onTouchEvent(ev);	
+	}
+	
+
 }
 
