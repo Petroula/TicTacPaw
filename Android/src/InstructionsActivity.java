@@ -11,6 +11,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+* @author Petroula
+*
+*/
+
+
 public class InstructionsActivity extends Activity implements OnClickListener, OnGestureListener {
 
 	Button button17;
