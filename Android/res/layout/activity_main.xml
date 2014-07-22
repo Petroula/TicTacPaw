@@ -1,16 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/paw"
-    tools:context="com.example.tictacpaw.MainActivity"
-    tools:ignore="MergeRootFrame" >
-
-    <RelativeLayout
+ <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/paws_swipe_right_no_text" >
+        android:background="@drawable/paws_swipe_right_no_text" 
+        tools:context="com.example.tictacpaw.MainActivity"
+        tools:ignore="MergeRootFrame" >
 
         <Button
             android:id="@+id/button6"
@@ -148,18 +144,9 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textView2"
             android:layout_below="@+id/button8"
+            android:layout_toLeftOf="@+id/button14"
             android:text="New Game"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/button14"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button10"
-            android:layout_alignBottom="@+id/button10"
-            android:layout_alignRight="@+id/button13"
-            android:text="↵Reset"
+            android:textSize="20sp"
             android:textColor="#FFFFFF" />
 
         <TextView
@@ -170,10 +157,19 @@
             android:layout_alignBottom="@+id/button10"
             android:layout_alignParentLeft="true"
             android:text="Level 1"
+            android:textSize="20sp"
             android:textColor="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </RelativeLayout>
-        
-</FrameLayout>
+        <Button
+            android:id="@+id/button14"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button13"
+            android:layout_toLeftOf="@+id/chronometer"
+            android:text="↵Reset"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp" />
 
+    </RelativeLayout>
