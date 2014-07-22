@@ -15,21 +15,21 @@ import android.widget.*;
 
 public class WelcomeActivity extends Activity implements OnClickListener, OnGestureListener {
 
-	Button button15, button16;
+	Button start;
 	TextView textView0;
 	GestureDetector detector;
+	String mode;
+	String selected = "";
 	
-	 @SuppressWarnings("deprecation")
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.welcome_screen);
 	    	
-	    	button15 = (Button)findViewById(R.id.button15);	 
-	    	button16 = (Button)findViewById(R.id.button16);
-	    	
-	    	button15.setOnClickListener(this);
-	    	button16.setOnClickListener(this);
+	    	start = (Button)findViewById(R.id.start);
+	    	start.setOnClickListener(this);
 		    
 	    	detector = new GestureDetector(this);
 	    	
@@ -37,8 +37,39 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	        	getFragmentManager().beginTransaction()
 	        	.add(R.id.container, new PlaceholderFragment()).commit();
 	        }
-		}   	
-	 
+		}   
+	
+	public void onCheckboxClicked(View v) {
+	  
+	    CheckBox easy = (CheckBox) findViewById(R.id.easy);
+	    CheckBox medium = (CheckBox) findViewById(R.id.medium);
+	    CheckBox hard = (CheckBox) findViewById(R.id.hard);    
+	    
+	    if(v.getId()==R.id.easy) {
+	    	mode = "easy";
+	        selected = mode;
+	        easy.setChecked(true);
+	        medium.setChecked(false);
+	        hard.setChecked(false);
+	      }
+	    if(v.getId()==R.id.medium) {
+	    	mode = "medium";
+	        selected = mode;
+	        medium.setChecked(true);
+	        easy.setChecked(false);
+	        hard.setChecked(false);
+	      }
+	    if(v.getId()==R.id.hard) {
+	    	mode = "hard";
+	        selected = mode;
+	        hard.setChecked(true);
+	        easy.setChecked(false);
+	        medium.setChecked(false);
+	     }   
+	    
+	}	    	     
+
+	
 	 @Override
 	    public boolean onCreateOptionsMenu(Menu menu) {
 	    	// Inflate the menu; this adds items to the action bar if it is present.
@@ -80,17 +111,18 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	 @Override
  	public void onClick(View v) {
 		 
-		 if(v.getId()==R.id.button15) {
+		 if(v.getId()==R.id.start) {
 			 Intent changeView = new Intent(getApplicationContext(), MainActivity.class);
+			 CheckBox medium = (CheckBox) findViewById(R.id.medium);
+			 
+			 /** Checks if the user started the game without checking any box, thus with the default(medium) mode*/  
+			 if(medium.isChecked()) {
+				 selected = "medium";
+			 }
+			 /** Passes the string to the MainActivity */  
+			 changeView.putExtra("mode", selected);
 			 startActivity(changeView);
-		 } else if(v.getId()==R.id.button16) {
-			 Intent changeView = new Intent(getApplicationContext(), InstructionsActivity.class);
-			 startActivity(changeView);	     
-		   
-		 }
-		 
-		 
-		 
+		 } 
  	}
 
 	@Override
