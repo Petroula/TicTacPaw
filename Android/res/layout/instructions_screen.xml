@@ -16,23 +16,20 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView000"
-            android:layout_width="match_parent"
-            android:layout_height="79dp"
-            android:layout_weight="0.01"
-            android:text="Game Instructions: Try to create 3 X's in a row - but be fast! Only if your time is under 10 seconds you can move to the next level! Be the quickest PAW!"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/button17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Close"
-            android:textColor="#FFFFFF" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView000"
+        android:layout_width="329dp"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Try to create 3 X&apos;s in a row - but be fast! Only if your time is under the time limit set by the mode you can move to the next level!
+        Easy: less than 10 seconds
+        Medium: less than 7 seconds
+        Hard: less than 5 seconds "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
 </RelativeLayout>
