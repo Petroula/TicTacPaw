@@ -20,14 +20,16 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
 	
 	Random rand = new Random();
 //	int computer;
-	Button[][] buttons=new Button[3][4];
+	Button[][] buttons=new Button[3][3];
 	int x, y;
-	Button button10, button14;
+	Button newGame, reset;
     TextView textView1, textView2, textView3;
     int count=1;
     Chronometer seconds;
     GestureDetector detector;
     int i, j;
+    int limit;
+	
     
     /** Checks if the main screen should be displayed after a swipe from the instructions page */
     public static int recognizeScreen =0;
@@ -39,7 +41,7 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     	setContentView(R.layout.activity_main);
     	
 	    for (x=0; x<3; x++) {
-			for (y=0; y<4; y++) {
+			for (y=0; y<3; y++) {
 				buttons[x][y] = new Button(this);
 				buttons[x][y].setOnClickListener(this);
 			}
@@ -55,17 +57,11 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     	buttons[2][1] = (Button)findViewById(R.id.button8);
     	buttons[2][2] = (Button)findViewById(R.id.button9);
     	
-    	button10 = (Button)findViewById(R.id.button10);
-    	button10.setOnClickListener(this);
-	    buttons[0][3] = (Button)findViewById(R.id.button11);
-	    buttons[1][3] = (Button)findViewById(R.id.button12);
-	    buttons[2][3] = (Button)findViewById(R.id.button13);
-	    button14 = (Button)findViewById(R.id.button14);
-	    button14.setOnClickListener(this);
+    	newGame = (Button)findViewById(R.id.newGame);
+    	newGame.setOnClickListener(this);
+	    reset = (Button)findViewById(R.id.reset);
+	    reset.setOnClickListener(this);
     	
-	    buttons[0][3].setVisibility(View.INVISIBLE);
-	    buttons[1][3].setVisibility(View.INVISIBLE);
-	    buttons[2][3].setVisibility(View.INVISIBLE); 
         
         seconds = (Chronometer) findViewById(R.id.chronometer);
     	seconds.start(); 
@@ -80,7 +76,7 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
 	
     	
     	for (x=0; x<3; x++) {
-			for (y=0; y<4; y++) {
+			for (y=0; y<3; y++) {
 				if (buttons[x][y].isPressed() && buttons[x][y].isEnabled()) {
 					
 					/** Assigns an X to the button pressed */  	 	
@@ -94,9 +90,9 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     	     }
          }
     	
-    	if (v.getId()==R.id.button10) {
+    	if (v.getId()==R.id.newGame) {
     		newGame();
-      } else if (v.getId()==R.id.button14) {
+      } else if (v.getId()==R.id.reset) {
    	  
     	  /** Changes back to the welcome screen */
     	  Intent changeView = new Intent(getApplicationContext(), WelcomeActivity.class);
@@ -140,12 +136,23 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     /** Checks for win, lose or tie situation */  	 
     public void checkEnd() {
     	
-    	
     	long timeMillis;
     	int timeSeconds;
     	
     	textView2 = (TextView) findViewById(R.id.textView2);
     	textView3 = (TextView) findViewById(R.id.textView3);
+    	
+    	
+    	/** Checks which box was selected and adjusts the limit */
+    	Intent changeView = getIntent();        	
+    	if(changeView.getStringExtra("mode").contains("easy")) {
+    		limit = 10;
+    	} else if (changeView.getStringExtra("mode").contains("medium")) {
+    		limit = 7;
+    	} else if (changeView.getStringExtra("mode").contains("hard")) {
+    		limit = 5;
+    	}
+    	
     	
         if (checkWin()==true) {
         	endGame();
@@ -173,17 +180,19 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
                 textView3.setText("Quickest Paw is approximately: " + Integer.toString(timeSeconds) + " seconds");
         	}
         	
-        	/** Continues to the next level only if time is less than 10 seconds */
-        	if(timeSeconds<10) {
+
+            
+        	
+        	if(timeSeconds<limit) {
                textView2.setText("You won!");
-               count++;               
+             //  count++;               
         	} else {
         		textView2.setText("Too slow, try again!");
         	}
-            if (count==3) {
-            	textView2.setText("You won all levels!");
-            	count=1;          	
-            }           
+     //       if (count==3) {
+     //       	textView2.setText("You won all levels!");
+     //       	count=1;          	
+     //       }           
             
         } else if (checkLose()==true) {
         	endGame();
@@ -209,17 +218,18 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
 			    || (buttons[0][2].getText()=="X" && buttons[1][2].getText()=="X" && buttons[2][2].getText()=="X")
 			    
 			    || (buttons[0][0].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][2].getText()=="X")
-			    || (buttons[0][2].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][0].getText()=="X") 
+			    || (buttons[0][2].getText()=="X" && buttons[1][1].getText()=="X" && buttons[2][0].getText()=="X")) {
 			
-				/** Level 2 - extra checks */  	
-                || (buttons[0][1].getText().equals("X") && buttons[0][2].getText().equals("X") && buttons[0][3].getText().equals("X"))
-                || (buttons[1][1].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[1][3].getText().equals("X"))
-                || (buttons[2][1].getText().equals("X") && buttons[2][2].getText().equals("X") && buttons[2][3].getText().equals("X"))
+			    
+	//			/** Level 2 - extra checks */  	
+   //             || (buttons[0][1].getText().equals("X") && buttons[0][2].getText().equals("X") && buttons[0][3].getText().equals("X"))
+  //              || (buttons[1][1].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[1][3].getText().equals("X"))
+  //              || (buttons[2][1].getText().equals("X") && buttons[2][2].getText().equals("X") && buttons[2][3].getText().equals("X"))
+               
+  //              || (buttons[0][3].getText().equals("X") && buttons[1][3].getText().equals("X") && buttons[2][3].getText().equals("X"))
                 
-                || (buttons[0][3].getText().equals("X") && buttons[1][3].getText().equals("X") && buttons[2][3].getText().equals("X"))
-                
-                || (buttons[0][1].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[2][3].getText().equals("X"))
-                || (buttons[0][3].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[2][1].getText().equals("X"))) {
+ //               || (buttons[0][1].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[2][3].getText().equals("X"))
+ //               || (buttons[0][3].getText().equals("X") && buttons[1][2].getText().equals("X") && buttons[2][1].getText().equals("X"))) {
     		return true;
     	}
     	return false;
@@ -237,17 +247,17 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
 			    || (buttons[0][2].getText()=="O" && buttons[1][2].getText()=="O" && buttons[2][2].getText()=="O")
 			    
 			    || (buttons[0][0].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][2].getText()=="O")
-			    || (buttons[0][2].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][0].getText()=="O") 
+			    || (buttons[0][2].getText()=="O" && buttons[1][1].getText()=="O" && buttons[2][0].getText()=="O")) {
 			
-				/** Level 2 - extra checks */  	
-                || (buttons[0][1].getText().equals("O") && buttons[0][2].getText().equals("O") && buttons[0][3].getText().equals("O"))
-                || (buttons[1][1].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[1][3].getText().equals("O"))
-                || (buttons[2][1].getText().equals("O") && buttons[2][2].getText().equals("O") && buttons[2][3].getText().equals("O"))
+//				/** Level 2 - extra checks */  	
+//                || (buttons[0][1].getText().equals("O") && buttons[0][2].getText().equals("O") && buttons[0][3].getText().equals("O"))
+//                || (buttons[1][1].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[1][3].getText().equals("O"))
+//                || (buttons[2][1].getText().equals("O") && buttons[2][2].getText().equals("O") && buttons[2][3].getText().equals("O"))
                 
-                || (buttons[0][3].getText().equals("O") && buttons[1][3].getText().equals("O") && buttons[2][3].getText().equals("O"))
+//                || (buttons[0][3].getText().equals("O") && buttons[1][3].getText().equals("O") && buttons[2][3].getText().equals("O"))
                 
-                || (buttons[0][1].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[2][3].getText().equals("O"))
-                || (buttons[0][3].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[2][1].getText().equals("O"))) {
+//                || (buttons[0][1].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[2][3].getText().equals("O"))
+//                || (buttons[0][3].getText().equals("O") && buttons[1][2].getText().equals("O") && buttons[2][1].getText().equals("O"))) {
     		return true;
     	}
     	return false;
@@ -263,13 +273,6 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     				&& !buttons[2][0].isEnabled() && !buttons[2][1].isEnabled() && !buttons[2][2].isEnabled())) {
     			return true;
     		 }
-    	} else if (count==2) {
-    		if (checkWin()==false && checkLose()==false && (!buttons[0][0].isEnabled() && !buttons[0][1].isEnabled() &&
-    				!buttons[0][2].isEnabled() && !buttons[1][0].isEnabled() && !buttons[1][1].isEnabled() && !buttons[1][2].isEnabled() 
-    				&& !buttons[2][0].isEnabled() && !buttons[2][1].isEnabled() && !buttons[2][2].isEnabled() && !buttons[0][3].isEnabled()
-    				&& !buttons[1][3].isEnabled() && !buttons[2][3].isEnabled())) {
-    			return true;
-    		}
     	}
 		return false;		
     }
@@ -279,7 +282,7 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
     public void endGame() {
     	
     	for (x=0; x<3; x++) {
-			for (y=0; y<4; y++) {
+			for (y=0; y<3; y++) {
 				buttons[x][y].setEnabled(false);
 			}
 	    }
@@ -303,26 +306,8 @@ public class MainActivity extends Activity implements OnClickListener, OnGesture
 			}
 	    }
     	
-    	buttons[0][3].setVisibility(View.INVISIBLE);
-    	buttons[1][3].setVisibility(View.INVISIBLE);
-    	buttons[2][3].setVisibility(View.INVISIBLE);	
-    	
-    	buttons[0][3].setText("");
-    	buttons[1][3].setText("");
-    	buttons[2][3].setText("");
     	textView1.setText("Level " + count);
-    	textView2.setText("");
-    	
-    	/** Makes the extra buttons available if the user is in level 2 */  	
-    	if (count==2) {
-    		buttons[0][3].setVisibility(View.VISIBLE);
-    		buttons[1][3].setVisibility(View.VISIBLE);
-    		buttons[2][3].setVisibility(View.VISIBLE);
-    		buttons[0][3].setEnabled(true);
-    		buttons[1][3].setEnabled(true);
-    		buttons[2][3].setEnabled(true);
-
-        }
+    	textView2.setText(""); 
     }
 
 
