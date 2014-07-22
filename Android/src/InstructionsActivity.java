@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -16,10 +13,8 @@ import android.widget.TextView;
 *
 */
 
+public class InstructionsActivity extends Activity implements OnGestureListener {
 
-public class InstructionsActivity extends Activity implements OnClickListener, OnGestureListener {
-
-	Button button17;
 	TextView textView000;
 	GestureDetector detector;
 	
@@ -29,18 +24,8 @@ public class InstructionsActivity extends Activity implements OnClickListener, O
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.instructions_screen);
-	    
-    	button17 = (Button)findViewById(R.id.button17);	
-     	button17.setOnClickListener(this);
      	
      	detector = new GestureDetector(this);
-	}
-
-
-	@Override
-	public void onClick(View v) {
-		Intent changeView = new Intent(getApplicationContext(), WelcomeActivity.class);
-		startActivity(changeView);	 
 	}
 
 
