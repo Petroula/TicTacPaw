@@ -2,11 +2,13 @@ package com.example.tictacpawfinal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
 * @author Petroula
@@ -15,8 +17,8 @@ import android.widget.TextView;
 
 public class InstructionsActivity extends Activity implements OnGestureListener {
 
-	TextView textView000;
 	GestureDetector detector;
+	AnimationDrawable animationDraw2;
 	
 	
 	@SuppressWarnings("deprecation")
@@ -25,7 +27,15 @@ public class InstructionsActivity extends Activity implements OnGestureListener 
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.instructions_screen);
      	
+    	/** Adds instructions in the Instructions Screen in the form of animation */ 
+    	ImageView instructionsV = (ImageView) findViewById(R.id.instructionsView);
+    	instructionsV.setBackgroundResource(R.drawable.instructions);
+    	animationDraw2 = (AnimationDrawable) instructionsV.getBackground();
+    	animationDraw2.start();
+    		
      	detector = new GestureDetector(this);
+     	
+     	Toast.makeText(getApplicationContext(), "Swipe to go back", Toast.LENGTH_LONG).show();
 	}
 
 
