@@ -2,6 +2,7 @@ package com.example.tictacpawfinal;
 
 import android.app.*;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.*;
 import android.view.GestureDetector.OnGestureListener;
@@ -20,7 +21,7 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	GestureDetector detector;
 	String mode;
 	String selected = "";
-	
+	AnimationDrawable animationDraw;
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -28,16 +29,25 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.welcome_screen);
 	    	
+	    	/** Adds tic tac toe animation to the Welcome Screen */ 
+	    	ImageView animationV = (ImageView) findViewById(R.id.animationView);
+	    	animationV.setBackgroundResource(R.drawable.animation);
+	    	animationDraw = (AnimationDrawable) animationV.getBackground();
+	    	animationDraw.start();
+	    	
 	    	start = (Button)findViewById(R.id.start);
 	    	start.setOnClickListener(this);
 		    
 	    	detector = new GestureDetector(this);
+	    	
+	    	Toast.makeText(getApplicationContext(), "Swipe for Instructions", Toast.LENGTH_LONG).show();
 	    	
 		    if (savedInstanceState == null) {
 	        	getFragmentManager().beginTransaction()
 	        	.add(R.id.container, new PlaceholderFragment()).commit();
 	        }
 		}   
+	
 	
 	public void onCheckboxClicked(View v) {
 	  
@@ -51,6 +61,7 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	        easy.setChecked(true);
 	        medium.setChecked(false);
 	        hard.setChecked(false);
+	        Toast.makeText(getApplicationContext(), "Easy mode", Toast.LENGTH_SHORT).show();
 	      }
 	    if(v.getId()==R.id.medium) {
 	    	mode = "medium";
@@ -58,6 +69,7 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	        medium.setChecked(true);
 	        easy.setChecked(false);
 	        hard.setChecked(false);
+	        Toast.makeText(getApplicationContext(), "Medium mode", Toast.LENGTH_SHORT).show();
 	      }
 	    if(v.getId()==R.id.hard) {
 	    	mode = "hard";
@@ -65,6 +77,7 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	        hard.setChecked(true);
 	        easy.setChecked(false);
 	        medium.setChecked(false);
+	        Toast.makeText(getApplicationContext(), "Hard mode", Toast.LENGTH_SHORT).show();
 	     }   
 	    
 	}	    	     
