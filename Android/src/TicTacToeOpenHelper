@@ -1,0 +1,87 @@
+package com.example.tictacpawfinal;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+* @author Petroula
+*
+*/
+
+public class TicTacToeOpenHelper extends SQLiteOpenHelper {
+		
+	  public SQLiteDatabase db;
+	  public Cursor cursor;
+	  public static String s = "";
+	  public static String sql = "";
+		public static final String TABLE_NAME = "scores";
+		public static final String COLUMN_NAME_S = "Seconds";
+		public static final String COLUMN_NAME_LEVEL = "Level";
+		public static final String COLUMN_ID = "_id";
+		
+		public static final int DATABASE_VERSION = 1;
+		public static final String DATABASE_NAME = "Scores.db";
+	    
+	    public static final String SCORES_TABLE_CREATE =
+	                "CREATE TABLE " + TABLE_NAME + " (" +
+	                		COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+	                		COLUMN_NAME_LEVEL + " INTEGER NOT NULL, " +
+	                		COLUMN_NAME_S + " INTEGER NOT NULL);";
+	    
+		
+		public TicTacToeOpenHelper(Context context) {
+			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		}
+
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			db.execSQL(SCORES_TABLE_CREATE);	
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {	
+			db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		}
+		
+		
+		/** Adds the score to the database  */
+		public void addScore(int level, int time) {
+			
+			db=this.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put(COLUMN_NAME_LEVEL, level);
+			values.put(COLUMN_NAME_S, time);		
+			db.insert(TABLE_NAME, null, values);
+			db.close();
+		}
+		
+		public void readAllScores() {
+			
+			s = "";
+	    	sql = "SELECT " +  COLUMN_ID  + "," + COLUMN_NAME_LEVEL + "," + COLUMN_NAME_S + " FROM " + TABLE_NAME;	
+			cursor = getReadableDatabase().rawQuery(sql, null);
+			if (cursor.moveToFirst()) {
+				do {
+				int id = cursor.getColumnIndex(COLUMN_ID);
+				int level = cursor.getColumnIndex(COLUMN_NAME_LEVEL);
+		    	int time = cursor.getColumnIndex(COLUMN_NAME_S);
+				s += "ID: " + cursor.getString(id) + " LEVEL: " + cursor.getString(level) +
+						", TIME: " + cursor.getString(time) + "\n";
+				} while (cursor.moveToNext());
+			};		
+			cursor.close();
+			return;
+		}
+	    
+		public void deleteAllScores() {
+			
+			db = this.getWritableDatabase();
+			db.delete(TABLE_NAME, null, null);
+			db.close();
+		}
+		
+}
+		
