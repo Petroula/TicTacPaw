@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tic Tac Paw</string>
+    <string name="TicTacPaw">TicTacPaw</string>
+    <string name="action_settings">Settings</string>
+    <string name="button1"></string>
+    <string name="button2"></string>
+    <string name="button3"></string>
+    <string name="button4"></string>
+    <string name="button5"></string>
+    <string name="button6"></string>
+    <string name="button7"></string>
+    <string name="button8"></string>
+    <string name="button9"></string>
+    <string name="newGame"></string>
+    <string name="reset"></string>
+    <string name="start"></string>
+    
+</resources>
+
+

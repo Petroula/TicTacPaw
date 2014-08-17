@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.tictacpaw.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"   
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView0"
+        android:text="Start"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/textView0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Welcome to Tic Tac Paw!"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:text="Swipe left for instructions"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:typeface="monospace" />
+
+    <ImageView
+        android:id="@+id/animationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/hard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:src="@android:drawable/screen_background_dark_transparent" />
+
+    <Button
+        android:id="@+id/scores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/start"
+        android:text="Scores"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:typeface="monospace" />
+
+    <CheckBox
+        android:id="@+id/easy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scores"
+        android:layout_marginTop="21dp"
+        android:layout_toLeftOf="@+id/medium"
+        android:onClick="onCheckboxClicked"
+        android:text="Easy"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <CheckBox
+        android:id="@+id/medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/easy"
+        android:layout_alignBottom="@+id/easy"
+        android:layout_centerHorizontal="true"
+        android:checked="true"
+        android:onClick="onCheckboxClicked"
+        android:text="Medium"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <CheckBox
+        android:id="@+id/hard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/medium"
+        android:layout_alignBottom="@+id/medium"
+        android:layout_toRightOf="@+id/medium"
+        android:onClick="onCheckboxClicked"
+        android:text="Hard"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+ 
+</RelativeLayout>

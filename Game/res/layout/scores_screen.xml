@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <TextView
+        android:id="@+id/tableTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="Quickest Paws"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <Button
+        android:id="@+id/deleteScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Clear All"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/allRows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deleteScores"
+        android:layout_alignLeft="@+id/playerName"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tableTitle"
+        android:layout_marginTop="34dp"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <Button
+        android:id="@+id/back"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/deleteScores"
+        android:layout_alignBottom="@+id/deleteScores"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:background="@android:color/transparent"
+        android:text="↵Back"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/timeSec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/levelNum"
+        android:layout_alignBottom="@+id/levelNum"
+        android:layout_marginLeft="23dp"
+        android:layout_toRightOf="@+id/levelNum"
+        android:text="Time(sec)"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/playerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tableTitle"
+        android:layout_marginTop="16dp"
+        android:layout_toLeftOf="@+id/deleteScores"
+        android:text="Name"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/levelNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/playerName"
+        android:layout_alignBottom="@+id/playerName"
+        android:layout_alignLeft="@+id/deleteScores"
+        android:layout_marginLeft="24dp"
+        android:text="Level"
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+    
+</RelativeLayout>

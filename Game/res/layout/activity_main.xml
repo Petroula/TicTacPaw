@@ -1,0 +1,166 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.tictacpaw.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/button3"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_below="@+id/button5"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button4"
+        android:layout_toLeftOf="@+id/button5"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button5"
+        android:layout_toRightOf="@+id/button2"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newGame"
+        android:layout_toRightOf="@+id/button8"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button7"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_toRightOf="@+id/button5"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/button1"
+        android:text="Level 1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:typeface="monospace" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button7"
+        android:layout_below="@+id/newGame"
+        android:layout_toLeftOf="@+id/chronometer"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:typeface="monospace" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button4"
+        android:layout_toRightOf="@+id/button1"
+        android:background="@drawable/button_pic0"
+        android:onClick="onClick"
+        android:textColor="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button8"
+        android:layout_centerHorizontal="true"
+        android:text="New Game"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:typeface="monospace" />
+
+    <Button
+        android:id="@+id/back"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        android:layout_toLeftOf="@+id/score"
+        android:background="@android:color/transparent"
+        android:text="↵Back"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        android:typeface="monospace" />
+
+</RelativeLayout>
