@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements OnClickListener {
     	
 	    helper = new TicTacToeOpenHelper(this);
 	    
+	    /** Dialog Box for the user to enter a name */
 	    final AlertDialog alert = new AlertDialog.Builder(this).create();
 	    final EditText name = new EditText(this);
 	    name.setFilters(new InputFilter[] { new InputFilter.LengthFilter(5) });	    

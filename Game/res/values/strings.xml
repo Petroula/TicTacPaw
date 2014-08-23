@@ -13,9 +13,21 @@
     <string name="button7"></string>
     <string name="button8"></string>
     <string name="button9"></string>
-    <string name="newGame"></string>
-    <string name="reset"></string>
-    <string name="start"></string>
+    <string name="newGame">New Game</string> 
+    <string name="back">↵Back</string>
+    <string name="start">Start</string>
+    <string name="scores">Scores</string>
+    <string name="level">Level 1</string>    
+    <string name="textView0">Welcome to Tic Tac Paw!</string>    
+    <string name="easy">Easy</string> 
+    <string name="medium">Medium</string> 
+    <string name="hard">Hard</string> 
+    <string name="tableTitle">Quickest Paws</string>
+    <string name="deleteScores">Clear All</string>
+    <string name="timeSec">Time(sec)</string>
+    <string name="playerName">Name</string>
+    <string name="levelNum">Level</string>
+    <string name="image"></string>
     
 </resources>
 

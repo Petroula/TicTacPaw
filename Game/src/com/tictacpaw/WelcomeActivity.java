@@ -1,9 +1,11 @@
 package com.tictacpaw;
 
+import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.*;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.*;
@@ -14,10 +16,11 @@ import android.widget.*;
 *
 */
 
+@SuppressLint("ShowToast")
 public class WelcomeActivity extends Activity implements OnClickListener, OnGestureListener {
 
 	Button start, scores;
-	TextView textView0, textView1;
+	TextView textView0;
 	GestureDetector detector;
 	String mode;
 	String selected = "";
@@ -43,14 +46,27 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
 	    	scores.setOnClickListener(this);
 		    
 	    	detector = new GestureDetector(this);
+	    	 
+	    	/** Toast appears for 5 seconds */ 
+            new CountDownTimer(5000, 1000) {
+            	Toast toast = Toast.makeText(getApplicationContext(), "Swipe Left for Instructions", Toast.LENGTH_LONG);
+    	        
+            	public void onTick(long millisUntilFinished) {
+                	toast.show();
+                }
+                public void onFinish() {
+                	toast.cancel();
+                }
+            }.start();
 	    	
-		    if (savedInstanceState == null) {
+	    	
+	    	if (savedInstanceState == null) {
 	        	getFragmentManager().beginTransaction()
 	        	.add(R.id.container, new PlaceholderFragment()).commit();
 	        }
 		}   
 	
-	
+	/** Easy Medium and Hard mode */
 	public void onCheckboxClicked(View v) {
 	  
 	    CheckBox easy = (CheckBox) findViewById(R.id.easy);
@@ -127,6 +143,7 @@ public class WelcomeActivity extends Activity implements OnClickListener, OnGest
  	public void onClick(View v) {
 		 
 		 if(v.getId()==R.id.start) {
+			 
 			 Intent changeView = new Intent(getApplicationContext(), MainActivity.class);
 			 CheckBox medium = (CheckBox) findViewById(R.id.medium);
 			 

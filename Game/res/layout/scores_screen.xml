@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:text="Quickest Paws"
+        android:text="@string/tableTitle"
         android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:typeface="monospace" />
@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="Clear All"
+        android:text="@string/deleteScores"
         android:textColor="#FFFFFF"
         android:typeface="monospace" />
 
@@ -48,9 +48,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="15dp"
         android:background="@android:color/transparent"
-        android:text="↵Back"
+        android:text="@string/back"
         android:textColor="#FFFFFF"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:typeface="monospace" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_alignBottom="@+id/levelNum"
         android:layout_marginLeft="23dp"
         android:layout_toRightOf="@+id/levelNum"
-        android:text="Time(sec)"
+        android:text="@string/timeSec"
         android:textColor="#FFFFFF"
         android:typeface="monospace" />
 
@@ -72,7 +72,7 @@
         android:layout_below="@+id/tableTitle"
         android:layout_marginTop="16dp"
         android:layout_toLeftOf="@+id/deleteScores"
-        android:text="Name"
+        android:text="@string/playerName"
         android:textColor="#FFFFFF"
         android:typeface="monospace" />
 
@@ -84,7 +84,7 @@
         android:layout_alignBottom="@+id/playerName"
         android:layout_alignLeft="@+id/deleteScores"
         android:layout_marginLeft="24dp"
-        android:text="Level"
+        android:text="@string/levelNum"
         android:textColor="#FFFFFF"
         android:typeface="monospace" />
     

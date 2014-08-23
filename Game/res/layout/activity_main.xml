@@ -102,7 +102,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/button1"
-        android:text="Level 1"
+        android:text="@string/level"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -144,7 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button8"
         android:layout_centerHorizontal="true"
-        android:text="New Game"
+        android:text="@string/newGame"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:typeface="monospace" />
@@ -158,9 +158,9 @@
         android:layout_marginBottom="17dp"
         android:layout_toLeftOf="@+id/score"
         android:background="@android:color/transparent"
-        android:text="↵Back"
+        android:text="@string/back"
         android:textColor="#FFFFFF"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:typeface="monospace" />
 
 </RelativeLayout>
